@@ -13,23 +13,24 @@ let cart = [
 
 /*
 Endpoint 1: Add an Item to the Cart
-Example Call:http://localhost:3000/cart/add?productId=3&name=Tablet&price=15000&quantity=1
+Example Call:
+http://localhost:3000/cart/add?productId=3&name=Tablet&price=15000&quantity=1
 */
 function addCartItem(cart, productId, name, price, quantity) {
   cart.push({
     productId: productId,
     name: name,
     price: price,
-    quantity: quantity,
+    quantity: quantity
   });
   return cart;
 }
 
 app.get('/cart/add', (req, res) => {
-  let productId = parseFloat(req.query.productId);
+  let productId = parseInt(req.query.productId);
   let name = req.query.name;
-  let price = parseFloat(req.query.price);
-  let quantity = parseFloat(req.query.quantity);
+  let price = parseInt(req.query.price);
+  let quantity = parseInt(req.query.quantity);
 
   res.json({ cartItems: addCartItem(cart, productId, name, price, quantity) });
 });
@@ -50,8 +51,8 @@ function editCartItem(cart, productId, quantity) {
 }
 
 app.get('/cart/edit', (req, res) => {
-  let productId = parseFloat(req.query.productId);
-  let quantity = parseFloat(req.query.quantity);
+  let productId = parseInt(req.query.productId);
+  let quantity = parseInt(req.query.quantity);
 
   res.json({ cartItems: editCartItem(cart, productId, quantity) });
 });
@@ -78,7 +79,7 @@ function deleteCartItem(cart, productId) {
 }
 
 app.get('/cart/delete', (req, res) => {
-  let productId = parseFloat(req.query.productId);
+  let productId = parseInt(req.query.productId);
 
   res.json({ cartItems: deleteCartItem(cart, productId) });
 });
