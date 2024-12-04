@@ -131,12 +131,12 @@ Endpoint: /cart/total-price
 Your Task: Create a function that will calculate the total price of items in the cart.
 Example Call:http://localhost:3000/cart/total-price
 Expected Output:
-{ 'totalPrice': 70000 }
+{ 'totalPrice': 90000 }
 */
 function totalCartPrice(cart) {
   let totalPrice = 0;
   for (let i = 0; i < cart.length; i++) {
-    totalPrice += cart[i].price;
+    totalPrice += cart[i].price*cart[i].quantity;
   }
   return totalPrice;
 }
