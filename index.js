@@ -6,10 +6,7 @@ let cors = require('cors');
 app.use(cors());
 app.use(express.static('static'));
 
-let cart = [
-  { productId: 1, name: 'Laptop', price: 50000, quantity: 1 },
-  { productId: 2, name: 'Mobile', price: 20000, quantity: 2 },
-];
+let cart = [];
 
 /*
 Endpoint 1: Add an Item to the Cart
