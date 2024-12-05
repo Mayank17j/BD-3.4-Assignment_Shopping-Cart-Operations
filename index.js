@@ -14,16 +14,25 @@ let cart = [
 /*
 Endpoint 1: Add an Item to the Cart
 Example Call:
-http://localhost:3000/cart/add?productId=3&name=Tablet&price=15000&quantity=1
+http://localhost:3000/cart/add?productId=3&name=Tablet&price=15000&quantity=3
 */
 function addCartItem(cart, productId, name, price, quantity) {
-  cart.push({
-    productId: productId,
-    name: name,
-    price: price,
-    quantity: quantity
-  });
-  return cart;
+  let productObjById = cart.find((item) => item.productId === productId);
+
+  if(productObjById){
+    productObjById.quantity+=quantity
+  }
+  else{
+    console.log("Cart on /cart/add before push:", cart);
+    cart.push({
+      productId: productId,
+      name: name,
+      price: price,
+      quantity: quantity
+    });
+  }
+  console.log("Cart on /cart/add after push:", cart);
+  return cart
 }
 
 app.get('/cart/add', (req, res) => {
@@ -31,8 +40,8 @@ app.get('/cart/add', (req, res) => {
   let name = req.query.name;
   let price = parseInt(req.query.price);
   let quantity = parseInt(req.query.quantity);
-
-  res.json({ cartItems: addCartItem(cart, productId, name, price, quantity) });
+  let result=addCartItem(cart, productId, name, price, quantity)
+  res.json({ cartItems: result });
 });
 
 /*
@@ -100,6 +109,8 @@ cartItems: {
 }
 */
 app.get('/cart', (req, res) => {
+  console.log("Cart on /cart call:", cart);
+
   res.json({ cartItems: cart });
 });
 
