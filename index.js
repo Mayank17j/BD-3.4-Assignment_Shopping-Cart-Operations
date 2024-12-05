@@ -105,9 +105,10 @@ cartItems: {
 ]
 }
 */
+let a = 0
 app.get('/cart', (req, res) => {
-  console.log("Cart on /cart call:", cart);
-
+  a = a + 1
+  console.log("Cart on /cart call " , a , ":" , cart);
   res.json({ cartItems: cart });
 });
 
